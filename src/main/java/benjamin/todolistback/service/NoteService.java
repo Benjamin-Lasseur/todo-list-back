@@ -13,25 +13,25 @@ import benjamin.todolistback.repository.NoteRepository;
 
 @Service
 public class NoteService {
-	
+
 	@Autowired
 	private NoteRepository noteRepository;
 
-	public List<Note> listerNotesNonDone(){
+	public List<Note> listerNotesNonDone() {
 		return this.noteRepository.findByDone(false);
 	}
-	
-	public boolean save(Note note) throws ValidationException{
+
+	public Note save(Note note) throws ValidationException {
+		note.setDateDebut(LocalDate.now());
 		if (note.getDateFin().isBefore(LocalDate.now())) {
-			throw new ValidationException("La date de début ne peut pas être avant aujourd'hui");
+			throw new ValidationException("La date de fin ne peut pas être avant aujourd'hui");
 		}
-		if(note.isDone()==true) {
+		if (note.isDone()) {
 			throw new ValidationException("La note ne peut pas être 'done' à l'initialisation");
 		}
-		if(note.getTitle().trim().equals("")) {
+		if (note.getTitle().trim().equals("")) {
 			throw new ValidationException("Le titre de la note ne peut pas être vide");
 		}
-		this.noteRepository.save(note);
-		return true;
+		return this.noteRepository.save(note);
 	}
 }

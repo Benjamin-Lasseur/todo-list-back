@@ -2,6 +2,7 @@ package benjamin.todolistback.entity;
 
 import java.time.LocalDate;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -22,18 +23,27 @@ public class Note {
 
 	private LocalDate dateFin;
 
+	@Column(nullable = false, columnDefinition = "TINYINT(1)")
 	private boolean done;
-	
+
 	public Note() {
 
 	}
-	
+
 	public Note(String title, String desc, LocalDate dateFin) {
-		this.title=title;
-		this.description=desc;
-		this.dateDebut=LocalDate.now();
-		this.dateFin=dateFin;
-		this.done=false;
+		this.title = title;
+		this.description = desc;
+		this.dateDebut = LocalDate.now();
+		this.dateFin = dateFin;
+		this.done = false;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
 	}
 
 	public int getId() {
