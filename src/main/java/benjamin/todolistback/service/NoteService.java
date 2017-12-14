@@ -34,4 +34,9 @@ public class NoteService {
 		}
 		return this.noteRepository.save(note);
 	}
+
+	public void noteDone(Note note) {
+		note.setDone(true);
+		this.noteRepository.save(note);
+	}
 }
