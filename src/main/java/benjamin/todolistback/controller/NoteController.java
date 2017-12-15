@@ -28,6 +28,12 @@ public class NoteController {
 	public List<Note> listerNotes() {
 		return this.noteService.listerNotesNonDone();
 	}
+	
+	@GetMapping("/all")
+	public List<Note> listerToutesNotes() {
+		return this.noteService.listerToutesNotes();
+	}
+
 
 	@PostMapping
 	public Note enregistrerNote(@RequestBody Note note) {

@@ -7,6 +7,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Note {
@@ -25,17 +27,30 @@ public class Note {
 
 	@Column(nullable = false, columnDefinition = "TINYINT(1)")
 	private boolean done;
+	
+	@ManyToOne
+	@JoinColumn(name="CAT_ID")
+	private Categorie categorie;
 
 	public Note() {
 
 	}
+	
+	public Categorie getCategorie() {
+		return categorie;
+	}
 
-	public Note(String title, String desc, LocalDate dateFin) {
+	public void setCategorie(Categorie categorie) {
+		this.categorie = categorie;
+	}
+
+	public Note(String title, String desc, LocalDate dateFin, Categorie categorie) {
 		this.title = title;
 		this.description = desc;
 		this.dateDebut = LocalDate.now();
 		this.dateFin = dateFin;
 		this.done = false;
+		this.categorie=categorie;
 	}
 
 	public String getDescription() {

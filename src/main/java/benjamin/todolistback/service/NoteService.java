@@ -21,6 +21,10 @@ public class NoteService {
 		return this.noteRepository.findByDone(false);
 	}
 
+	public List<Note> listerToutesNotes() {
+		return this.noteRepository.findAll();
+	}
+
 	public Note save(Note note) throws ValidationException {
 		note.setDateDebut(LocalDate.now());
 		if (note.getDateFin().isBefore(LocalDate.now())) {
